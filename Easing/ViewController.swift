@@ -25,7 +25,13 @@ class ViewController: UIViewController {
     //MARK: View Lifecycle
     
     override func viewDidLoad() {
-        self.resetButton?.enabled = false;
+        resetButton?.enabled = false;
+        
+        //Comment in to hide various things
+//        easeInView?.hidden = true
+//        easeOutView?.hidden = true
+//        easeInOutView?.hidden = true
+//        linearView?.hidden = true
     }
     
     override func viewDidLayoutSubviews() {
@@ -39,36 +45,35 @@ class ViewController: UIViewController {
     //MARK: Animations
     
     @IBAction func fireAnimations() {
-        fireAnimations(4.0, reverse: false)
+        goButton?.enabled = false;
+        fireAnimations(2.0, reverse: false)
     }
     
     func fireAnimations(duration : NSTimeInterval, reverse : Bool) {
-        fireAnimationForView(easeInView, easing: .CurveEaseIn, duration: duration, reverse: reverse)
-        fireAnimationForView(easeOutView, easing: .CurveEaseOut, duration: duration, reverse: reverse)
-        fireAnimationForView(easeInOutView, easing: .CurveEaseInOut, duration: duration, reverse: reverse)
-        fireAnimationForView(linearView, easing: .CurveLinear, duration: duration, reverse: reverse)
+        fireAnimationForView(easeInView!, easing: .CurveEaseIn, duration: duration, reverse: reverse)
+        fireAnimationForView(easeOutView!, easing: .CurveEaseOut, duration: duration, reverse: reverse)
+        fireAnimationForView(easeInOutView!, easing: .CurveEaseInOut, duration: duration, reverse: reverse)
+        fireAnimationForView(linearView!, easing: .CurveLinear, duration: duration, reverse: reverse)
     }
     
-    func fireAnimationForView(view : UIView?, easing : UIViewAnimationOptions, duration : NSTimeInterval, reverse : Bool ) {
-        if let reallyAView = view {
-            var move = self.targetMove
-            if reverse {
-                move *= -1
-            }
-            UIView.animateWithDuration(duration,
-                delay: 0,
-                options: easing,
-                animations: { () -> Void in
-                    reallyAView.frame = CGRectOffset(reallyAView.frame, move, 0);
-                }) { (Bool) -> Void in
-                    if reverse {
-                        self.goButton?.enabled = true;
-                        self.resetButton?.enabled = false;
-                    } else {
-                        self.resetButton?.enabled = true;
-                        self.goButton?.enabled = false;
-                    }
-            }
+    func fireAnimationForView(view : UIView, easing : UIViewAnimationOptions, duration : NSTimeInterval, reverse : Bool ) {
+        var move = self.targetMove
+        if reverse {
+            move *= -1
+        }
+        UIView.animateWithDuration(duration,
+            delay: 0,
+            options: easing,
+            animations: { () -> Void in
+                view.frame = CGRectOffset(view.frame, move, 0);
+            }) { (Bool) -> Void in
+                if reverse {
+                    self.goButton?.enabled = true;
+                    self.resetButton?.enabled = false;
+                } else {
+                    self.resetButton?.enabled = true;
+                    self.goButton?.enabled = false;
+                }
         }
     }
     
