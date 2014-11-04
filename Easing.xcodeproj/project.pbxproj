@@ -405,6 +405,7 @@
 				9BEFFC0019FDE611007EA5B7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9BEFFC0119FDE611007EA5B7 /* Build configuration list for PBXNativeTarget "EasingTests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +414,7 @@
 				9BEFFC0319FDE611007EA5B7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
