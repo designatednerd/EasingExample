@@ -25,13 +25,8 @@ class ViewController: UIViewController {
     //MARK: View Lifecycle
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         resetButton?.enabled = false;
-        
-        //Comment in to hide various things
-//        easeInView?.hidden = true
-//        easeOutView?.hidden = true
-//        easeInOutView?.hidden = true
-//        linearView?.hidden = true
     }
     
     override func viewDidLayoutSubviews() {
@@ -39,6 +34,19 @@ class ViewController: UIViewController {
         if let reallyAView = easeInView {
             let fullViewWidth = CGRectGetWidth(self.view.frame)
             targetMove = fullViewWidth - CGRectGetMinX(reallyAView.frame) - CGRectGetWidth(reallyAView.frame) - 20.0
+        }
+    }
+    
+    //MARK: Easy Show/Hide
+    
+    @IBAction func toggleAlpha(sender: UITapGestureRecognizer) {
+        if let view = sender.view {
+            if view.alpha == 1 {
+                //Dropping alpha to .01 or below causes the tap gesture recognizers to fail. ಠ_ಠ
+                view.alpha = 0.011
+            } else {
+                view.alpha = 1
+            }
         }
     }
     
